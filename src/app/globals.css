@@ -1,26 +1,282 @@
+/* Hallmark · v2.0.0 · shape: public notice · genre: editorial · theme: project (Design.md locked) · job: visit · hero: Settled · nav: edge-aligned bar, the wordmark and four section links on one line under a hairline · footer: colophon · imagery: photographs, Pexels 2 · posture: restrained · contrast: pass · fold: pass
+ * pre-emit critique: P5 H4 E5 S5 R5 V4 · weakest: V, the section rhythm leans on a single hairline language, so the story band and the forest close carry the variation
+ * axes: cream/grotesk-sans/green · surface: absolute cards (#fff per Design.md §2) on a cream field, one forest band at the close
+ * theme source: Design.md (locked system, no deal drawn) · type extended with four landing tokens, documented in Design.md § 5 */
+/* Hallmark · waive 7b · white is the locked card and popover token in this design system, never the page field · Design.md §2 fixes it, so the page keeps it */
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:is(.dark *));
+
+/* -------------------------------------------------------------------------
+   Brand primitives
+   Raw, named values straight from the brand palette. These generate
+   utilities such as `bg-cream`, `text-forest`, and `border-sand`.
+   Prefer the semantic tokens below them for product UI.
+   ------------------------------------------------------------------------- */
+@theme {
+  /* Core palette */
+  --color-cream: #fff8e7;
+  --color-leaf: #66bb6a;
+  --color-forest: #388e3c;
+  --color-ocean: #1976bb;
+  --color-sky: #81c7e8;
+  --color-ink: #333333;
+
+  /* Derived greens and neutrals (see Design.md for the reasoning) */
+  --color-forest-strong: #357f38; /* brand green nudged darker to clear AA on white */
+  --color-ink-soft: color-mix(in oklab, var(--color-ink) 75%, var(--color-cream));
+  --color-surface: #ffffff;
+  --color-cream-deep: color-mix(in oklab, var(--color-cream) 96%, var(--color-ink));
+  --color-sand: color-mix(in oklab, var(--color-cream) 87%, var(--color-ink));
+  --color-sand-strong: color-mix(in oklab, var(--color-cream) 52%, var(--color-ink));
+  --color-destructive-strong: #b42318;
+  --color-destructive-soft: #f97066;
+  --color-leaf-wash: color-mix(in oklab, var(--color-surface) 84%, var(--color-leaf));
+  --color-sky-wash: color-mix(in oklab, var(--color-surface) 78%, var(--color-sky));
 }
 
+/* -------------------------------------------------------------------------
+   Semantic tokens
+   The shadcn contract. Components only ever reference these.
+   `inline` lets the values resolve at the element, so `.dark` can swap them.
+   ------------------------------------------------------------------------- */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: color-mix(in oklab, var(--primary), black 12%);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Typography */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-geist-sans);
+
+  /* Landing type steps — see Design.md § 5 */
+  --text-display: clamp(2.5rem, 7.2vw, 6.25rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.03em;
+  --text-section: clamp(2rem, 3.6vw, 3.25rem);
+  --text-section--line-height: 1.08;
+  --text-section--letter-spacing: -0.025em;
+  --text-title: 1.5rem;
+  --text-title--line-height: 1.25;
+  --text-title--letter-spacing: -0.015em;
+  --text-lead: clamp(1.125rem, 1.3vw, 1.3125rem);
+  --text-lead--line-height: 1.5;
+
+  /* Radius — crisp, 4px base */
+  --radius: 0.25rem;
+  --radius-sm: 0.125rem; /* 2px */
+  --radius-md: 0.1875rem; /* 3px */
+  --radius-lg: 0.25rem; /* 4px */
+  --radius-xl: 0.375rem; /* 6px */
+  --radius-2xl: 0.5rem; /* 8px */
+  --radius-3xl: 0.625rem; /* 10px */
+  --radius-4xl: 0.75rem; /* 12px */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: var(--color-cream);
+  --foreground: var(--color-ink);
+  --card: var(--color-surface);
+  --card-foreground: var(--color-ink);
+  --popover: var(--color-surface);
+  --popover-foreground: var(--color-ink);
+
+  --primary: var(--color-forest-strong);
+  --primary-foreground: var(--color-surface);
+  --secondary: var(--color-leaf-wash);
+  --secondary-foreground: var(--color-ink);
+  --muted: var(--color-cream-deep);
+  --muted-foreground: var(--color-ink-soft);
+  --accent: var(--color-sky-wash);
+  --accent-foreground: var(--color-ink);
+
+  --destructive: var(--color-destructive-strong);
+  --border: var(--color-sand);
+  --input: var(--color-sand-strong);
+  --ring: var(--color-ocean);
+
+  --chart-1: var(--color-forest);
+  --chart-2: var(--color-leaf);
+  --chart-3: var(--color-ocean);
+  --chart-4: var(--color-sky);
+  --chart-5: var(--color-ink);
+
+  --sidebar: var(--color-surface);
+  --sidebar-foreground: var(--color-ink);
+  --sidebar-primary: var(--color-forest-strong);
+  --sidebar-primary-foreground: var(--color-surface);
+  --sidebar-accent: var(--color-cream-deep);
+  --sidebar-accent-foreground: var(--color-ink);
+  --sidebar-border: var(--color-sand);
+  --sidebar-ring: var(--color-ocean);
+}
+
+.dark {
+  --background: var(--color-ink);
+  --foreground: var(--color-cream);
+  --card: color-mix(in oklab, var(--color-ink) 92%, var(--color-cream));
+  --card-foreground: var(--color-cream);
+  --popover: color-mix(in oklab, var(--color-ink) 92%, var(--color-cream));
+  --popover-foreground: var(--color-cream);
+
+  --primary: var(--color-leaf);
+  --primary-foreground: var(--color-ink);
+  --secondary: color-mix(in oklab, var(--color-ink) 88%, var(--color-cream));
+  --secondary-foreground: var(--color-cream);
+  --muted: color-mix(in oklab, var(--color-ink) 90%, var(--color-cream));
+  --muted-foreground: color-mix(in oklab, var(--color-cream) 72%, var(--color-ink));
+  --accent: color-mix(in oklab, var(--color-ocean) 45%, var(--color-ink));
+  --accent-foreground: var(--color-cream);
+
+  --destructive: var(--color-destructive-soft);
+  --border: color-mix(in oklab, var(--color-cream) 16%, transparent);
+  --input: color-mix(in oklab, var(--color-cream) 24%, transparent);
+  --ring: var(--color-sky);
+
+  --chart-1: var(--color-leaf);
+  --chart-2: var(--color-sky);
+  --chart-3: var(--color-ocean);
+  --chart-4: var(--color-cream);
+  --chart-5: var(--color-forest);
+
+  --sidebar: color-mix(in oklab, var(--color-ink) 96%, var(--color-cream));
+  --sidebar-foreground: var(--color-cream);
+  --sidebar-primary: var(--color-leaf);
+  --sidebar-primary-foreground: var(--color-ink);
+  --sidebar-accent: color-mix(in oklab, var(--color-ink) 88%, var(--color-cream));
+  --sidebar-accent-foreground: var(--color-cream);
+  --sidebar-border: color-mix(in oklab, var(--color-cream) 16%, transparent);
+  --sidebar-ring: var(--color-sky);
+}
+
+@utility container-page {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2.5rem;
+  }
+
+  @media (width >= 64rem) {
+    padding-inline: 4rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  html {
+    scrollbar-color: var(--color-sand-strong) var(--color-cream);
+    scroll-padding-top: calc(var(--spacing) * 6);
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-synthesis: none;
+    caret-color: var(--color-forest-strong);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  h1,
+  h2,
+  h3 {
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  img,
+  video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  [data-slot] {
+    position: relative;
+    overflow: hidden;
+  }
+
+  [data-slot] > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  ::selection {
+    background: var(--color-leaf);
+    color: var(--color-ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }

@@ -1,0 +1,35 @@
+[
+ {
+  "shape": "public notice",
+  "theme": "project (Design.md locked)",
+  "axes": "cream/grotesk-sans/green",
+  "hero": "Settled",
+  "nav": "letterhead masthead",
+  "footer": "colophon",
+  "imagery": "photographs, Pexels 2 (hero plate, baking band)",
+  "photos": [
+   "pexels-planting.jpg (Helena Lopes)",
+   "pexels-bread.jpg (Chris F)"
+  ],
+  "entry": "src/app/page.tsx",
+  "fingerprint": "Hanging|Single column|Hairline|Solid|Margin-aligned|None",
+  "sections": [
+   "hero",
+   "kitchen",
+   "trades + photo",
+   "youth",
+   "enterprise",
+   "record",
+   "governance",
+   "visit",
+   "footer"
+  ],
+  "signature": "eight trades set as a plain wall of words",
+  "waived": [
+   "7b"
+  ],
+  "prompt": "Build a landing page for Likusasa Lomama community project from its community project profile",
+  "date": "2026-10-24",
+  "mode": "build"
+ }
+]

@@ -1,0 +1,12 @@
+{
+  "scanned": "2026-10-24",
+  "findings": {
+    "fonts": "Geist Sans + Geist Mono via next/font (src/app/layout.tsx L4-13)",
+    "palette": "Brand primitives + semantic tokens in src/app/globals.css L13-40 and L101-179; locked by Design.md L29-103",
+    "motion": "none declared; tw-animate-css imported but unused on the page",
+    "spacing": "Tailwind v4 default scale; no custom --space-* tokens",
+    "framework": "Next.js 16.4.3 (App Router, Turbopack), React 19.3, Tailwind v4 (package.json L15-21)"
+  },
+  "preserve": ["palette", "Geist type pair", "radius scale", "shadcn/ui components", "token tiers"],
+  "introduce": ["page shape", "hero", "section rhythm", "Hallmark stamp", "image slot", "landing type tokens"]
+}
