@@ -2,13 +2,6 @@ import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 
-const registration = [
-  ["Registered NPO", "152-947"],
-  ["Address", "38 Mkize Street, Ward 36, KwaDwesi Extension, Gqeberha, 6201"],
-  ["Contact", "072 170 7392 | likusasalomama@gmail.com"],
-];
-
-const action = "h-12 px-6 text-base";
 
 export function Hero() {
   return (
@@ -34,17 +27,17 @@ export function Hero() {
               Sustainable livelihoods
             </p>
             <div className="mt-12 flex flex-wrap items-center gap-3">
-              <Button asChild className={action}>
+              <Button asChild className="h-12 px-6 text-base">
                 <a href="tel:+27721707392">Call us on 072 170 7392</a>
               </Button>
-              <Button asChild variant="outline" className={action}>
+              <Button asChild variant="outline" className="h-12 px-6 text-base">
                 <a href="#programmes">See our programmes</a>
               </Button>
             </div>
           </div>
 
           <figure>
-            <div className="relative aspect-[4/5] w-full overflow-clip bg-muted">
+            <div className="relative aspect-4/5 w-full overflow-clip bg-muted">
               <Image
                 src="/photos/pexels-planting.jpg"
                 alt="Hands in gardening gloves planting lettuce seedlings in a bed"
